@@ -26,6 +26,31 @@ public class TodoListService {
     }
 
     public void update(TodoList todoList){
-        
+        var verifyId = todoListRepository.findById(todoList.getId());
+
+        if (!verifyId.isPresent()) {
+            throw new BusinessException("Task não existe");
+        }
+
+        if(todoList.getDescription() != null){
+            verifyId.get().setDescription(todoList.getDescription());
+        }
+
+        if(todoList.isCompleted() != false){
+            verifyId.get().setCompleted(todoList.isCompleted());
+        }
+
+        todoListRepository.save(verifyId.get());
+    }
+
+    public void delete(String id){
+        var verifyId = todoListRepository.findById(id);
+
+        if (!verifyId.isPresent()) {
+            throw new BusinessException("Task não existe");
+        }
+
+        todoListRepository.deleteById(id);
+
     }
 }

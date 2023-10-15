@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.tasksproject.dto.IRequestBodyTodoList;
-import edu.tasksproject.handler.BusinessException;
 import edu.tasksproject.modal.TodoList;
 import edu.tasksproject.repositories.TodoListRepository;
 import edu.tasksproject.service.TodoListService;
@@ -44,14 +44,16 @@ public class TodoListController {
     }
 
     @DeleteMapping("/delete-todo-list/{id}")
-    public ResponseEntity<TodoList> deleteTodoList() {
+    public ResponseEntity<TodoList> deleteTodoList(@PathVariable("id") String id) {
         // Todo-List: retornar método de criação dos servições de todolist
-        return null;
+        todoListService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update-todo-list/{id}")
-    public ResponseEntity<TodoList> updateTodoList() {
+    @PutMapping("/update-todo-list")
+    public ResponseEntity<TodoList> updateTodoList(@RequestBody TodoList todolist) {
         // Todo-List: retornar método de criação dos servições de todolist
-        return null;
+        todoListService.update(todolist);
+        return ResponseEntity.ok().build();
     }
 }
