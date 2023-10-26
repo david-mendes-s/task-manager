@@ -36,9 +36,9 @@ public class TodoListService {
             verifyId.get().setDescription(todoList.getDescription());
         }
 
-        if(todoList.isCompleted() != false){
-            verifyId.get().setCompleted(todoList.isCompleted());
-        }
+        
+        verifyId.get().setCompleted(todoList.isCompleted());
+        
 
         todoListRepository.save(verifyId.get());
     }

@@ -29,10 +29,10 @@ public class TodoListController {
     TodoListRepository todoListRepository;
 
     @GetMapping("/todo-list-all")
-    public ResponseEntity<List<TodoList>> getAllTodoListOfOneTask(@RequestBody IRequestBodyTodoList task) {
+    public ResponseEntity<List<TodoList>> getAllTodoListOfOneTask() {
         // Todo-List: retornar método de criação dos servições de todolist
 
-        return ResponseEntity.ok(todoListRepository.findByTodoListTaskId(task.getId()));
+        return ResponseEntity.ok(todoListRepository.findAll());
     }
 
     @PostMapping("/create/todo-list-task")
